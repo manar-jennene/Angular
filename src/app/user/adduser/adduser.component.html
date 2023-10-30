@@ -1,0 +1,108 @@
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="container">
+<div class="row">
+    <div class="col-lg-12">
+        <div class="main-box clearfix">
+            <div class="table-responsive">
+                <table class="table user-list">
+                  <thead>
+                      <tr>
+                        <th>picture</th>
+                        <th>Prénom</th>
+                        <th>Nom de famille</th>
+                        <th>Date de naissance</th>
+                        <th>Catégorie du compte</th>
+                        <th>Email</th>
+                        <th>password</th>                         
+                        <th>Profession</th>
+                        <th>Action</th>
+                          
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let user of List_user" class="table-row">
+                          <td class="table-cell"><img [src]="user.picture" alt="Image de l'utilisateur" width="50" height="50"></td>
+                          <td class="table-cell">{{ user.firstName }}</td>
+                          <td class="table-cell">{{ user.lastName }}</td>
+                          <td class="table-cell">{{ user.birthDate }}</td>
+                          <td class="table-cell">{{ user.accountCategory }}</td>
+                          <td class="table-cell">{{ user.email }}</td>
+                          <td class="table-cell">{{ user.password }}</td>
+                          <td class="table-cell">{{ user.profession }}</td>
+                          <td class="table-cell">
+                       
+                              <button class="btn btn-success btn-sm rounded-0" type="button" data-toggle="tooltip" data-placement="top" title="Edit" [routerLink]="['editUser',user.id]"><i class="fa fa-edit"></i></button>
+                       
+                            <button (click)="deleteUser(user.id)" [class.button-rouge]="true">Supprimer</button>
+                          </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+
+                
+                <router-outlet></router-outlet>
+                
+            </div>
+            <ul class="pagination pull-right">
+                <li><a href="#"><i class="fa fa-chevron-left"></i></a></li>
+                <li><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+                <li><a href="#"><i class="fa fa-chevron-right"></i></a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+</div>
+
+
+<h2>add new user</h2>
+<form #addForm="ngForm" (ngSubmit)="add(addForm)">
+    <div class="form-group">
+      <label for="fn">First name</label>
+      <input type="text" class="form-control" id="fn" name="fn" ngModel required minlength="3" #fn="ngModel">
+      <small class="text text-danger" *ngIf="fn?.errors?.['required'] && fn.touched">Name is required</small>
+      <small class="text text-danger" *ngIf="fn?.errors?.['minlength'] && fn.touched">first name should have at least 3 characters</small>
+      <small class="text text-danger" *ngIf="fn?.errors?.['pattern'] && fn.touched">first name should only contain letters</small>
+
+      <label for="fn">Last name </label>
+      <input type="text" class="form-control" id="ln" name="ln" ngModel required minlength="3" #ln="ngModel">
+      <small class="text text-danger" *ngIf="ln?.errors?.['required'] && ln.touched">Last name is required</small>
+      <small class="text text-danger" *ngIf="ln?.errors?.['minlength'] && ln.touched">Last name should have at least 3 characters</small>
+      <small class="text text-danger" *ngIf="ln?.errors?.['pattern'] && ln.touched">Last name should only contain letters</small>
+
+    </div>
+    <label for="fn">Birth date </label>
+    <input type="date" class="form-control" id="fn" name="fn" ngModel required minlength="3" #fn="ngModel">
+    <small class="text text-danger" *ngIf="fn?.errors?.['required'] && fn.touched">birth date is required</small>
+
+    <label for="fn">Email </label>
+    <input type="email" class="form-control" id="em" name="em" ngModel required minlength="3" pattern="^[a-zA-Z0-9._-]+@gmail.com$" #em="ngModel">
+    <small class="text text-danger" *ngIf="em?.errors?.['required'] && em.touched">email is required</small>
+    <small class="text text-danger" *ngIf="em?.errors?.['pattern'] && em.touched">Email should end with '@gmail.com'</small>
+
+    <label for="fn">Password </label>
+    <input type="password" class="form-control" id="pwd" name="pwd" ngModel required minlength="8" pattern="^[a-zA-Z0-9]{8,}?$" #pwd="ngModel">
+    <small class="text text-danger" *ngIf="pwd?.errors?.['required'] && pwd.touched">Password is required</small>
+    <small class="text text-danger" *ngIf="pwd?.errors?.['minlength'] && pwd.touched">Password should have at least 8 characters</small>
+    <small class="text text-danger" *ngIf="pwd?.errors?.['pattern'] && pwd.touched">Password should only contain letters (A-Z, a-z), numbers (0-9)</small>
+
+    <label for="fn">Profession  </label>
+    <input type="email" class="form-control" id="fn" name="fn" ngModel required minlength="3" #fn="ngModel">
+    <small class="text text-danger" *ngIf="fn?.errors?.['required'] && fn.touched">profession is required</small>
+
+
+    <label for="fn">Customer </label>
+<select class="form-control" id="fn" name="fn" ngModel required>
+    <option value="Customer">Customer</option>
+    <!-- add other categories here -->
+</select>
+<small class="text text-danger" *ngIf="fn?.errors?.['required'] && fn.touched">custommer is required</small>
+
+
+
+<button type="submit" class="btn btn-primary" [disabled]="addForm.invalid">Submit</button>  </form>

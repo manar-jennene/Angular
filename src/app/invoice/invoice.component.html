@@ -1,0 +1,9 @@
+<div *ngIf="factureActive; else factureInactive">
+    <p>ID de la facture : {{ idFacture }}</p>
+    <h3>Détails de la facture :</h3>
+    </div>
+  
+  <ng-template #factureInactive>
+    <p>Impossible de visualiser les détails de la facture</p>
+  </ng-template>
+  <button routerLink="/main-invoice">Retour</button>

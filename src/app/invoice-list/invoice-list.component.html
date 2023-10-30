@@ -1,0 +1,11 @@
+<p>invoice-list works!</p>
+<ul>
+  <li *ngFor="let facture of List">
+    Facture {{ facture.idFacture }}
+   <!-- <a [routerLink]="['/invoice', facture.idFacture, facture.active]">Détails</a>
+    <a [routerLink]="['/invoice']" [queryParams]="{ id: facture.idFacture, active: facture.active }">Détails</a> -->
+
+  </li>
+</ul>
+
+
